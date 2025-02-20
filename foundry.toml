@@ -9,7 +9,7 @@ optimizer_runs = 200
 # auto_detect_remappings = true
 remappings = [
     "@chainlink/contracts-ccip/=lib/ccip/contracts/",
-    "@chainlink/local/src/v0.8/=lib/local/src/v0.8/",
+    "@chainlink/local/src/v0.8/=node_modules/@chainlink/local/src/v0.8/",
     "@openzeppelin/contracts/=lib/openzeppelin-contracts/"
 ]
 
