@@ -14,7 +14,7 @@
   "scripts": {
     "update": "forge update",
     "setup": "forge install && forge build",
-    "test": "forge test --match-contract ReceiverTest -vv",
+    "test": "forge test -vvv",
     "deploy:tokens": "forge script ./script/deploy/DeployTokens.s.sol:DeployToken -vvv --broadcast --rpc-url ethereumSepolia",
     "deploy:pool": "forge script ./script/deploy/DeployPool.s.sol:DeployBurnMintTokenPool -vvv --broadcast --rpc-url baseSepolia"
   }

@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.24 <0.9.0;
 
-import {Test, Vm} from "forge-std/Test.sol";
+import {console} from "lib/forge-std/src/console.sol";
+import {Test} from "lib/forge-std/src/Test.sol";
 import {CCIPLocalSimulatorFork, Register} from "node_modules/@chainlink/local/src/ccip/CCIPLocalSimulatorFork.sol";
 import {BurnMintTokenPool, TokenPool} from "lib/ccip/contracts/src/v0.8/ccip/pools/BurnMintTokenPool.sol";
-import {LockReleaseTokenPool} from "lib/ccip/contracts/src/v0.8/ccip/pools/LockReleaseTokenPool.sol"; // not used in this test
 import {IBurnMintERC20} from "lib/ccip/contracts/src/v0.8/shared/token/ERC20/IBurnMintERC20.sol";
 import {RegistryModuleOwnerCustom} from
     "lib/ccip/contracts/src/v0.8/ccip/tokenAdminRegistry/RegistryModuleOwnerCustom.sol";
@@ -59,28 +59,28 @@ contract MockERC20BurnAndMintToken is IBurnMintERC20, ERC20Burnable, AccessContr
     }
 }
 
-contract CCIPv1_5BurnMintPoolFork is Test {
+contract BurnMintPoolFork is Test {
     CCIPLocalSimulatorFork public ccipLocalSimulatorFork;
     MockERC20BurnAndMintToken public mockERC20TokenEthSepolia;
     MockERC20BurnAndMintToken public mockERC20TokenBaseSepolia;
     BurnMintTokenPool public burnMintTokenPoolEthSepolia;
     BurnMintTokenPool public burnMintTokenPoolBaseSepolia;
 
-    Register.NetworkDetails ethSepoliaNetworkDetails;
-    Register.NetworkDetails baseSepoliaNetworkDetails;
+    Register.NetworkDetails public ethSepoliaNetworkDetails;
+    Register.NetworkDetails public baseSepoliaNetworkDetails;
 
-    uint256 ethSepoliaFork;
-    uint256 baseSepoliaFork;
+    uint256 public ethSepoliaFork;
+    uint256 public baseSepoliaFork;
 
-    address alice;
+    address public alice;
 
     function setUp() public {
         alice = makeAddr("alice");
 
-        string memory ETHEREUM_SEPOLIA_RPC_URL = vm.envString("ETHEREUM_SEPOLIA_RPC_URL");
-        string memory BASE_SEPOLIA_RPC_URL = vm.envString("BASE_SEPOLIA_RPC_URL");
-        ethSepoliaFork = vm.createSelectFork(ETHEREUM_SEPOLIA_RPC_URL);
-        baseSepoliaFork = vm.createFork(BASE_SEPOLIA_RPC_URL);
+        string memory SEPOLIA_RPC = vm.envString("SEPOLIA_RPC");
+        string memory BASE_SEPOLIA_RPC = vm.envString("BASE_SEPOLIA_RPC");
+        ethSepoliaFork = vm.createSelectFork(SEPOLIA_RPC);
+        baseSepoliaFork = vm.createFork(BASE_SEPOLIA_RPC);
 
         ccipLocalSimulatorFork = new CCIPLocalSimulatorFork();
         vm.makePersistent(address(ccipLocalSimulatorFork));
@@ -89,16 +89,17 @@ contract CCIPv1_5BurnMintPoolFork is Test {
         vm.startPrank(alice);
         mockERC20TokenEthSepolia = new MockERC20BurnAndMintToken();
         vm.stopPrank();
-
+        console.log("[1] mockERC20TokenEthSepolia deployed");
         // Step 2) Deploy token on Base Sepolia
         vm.selectFork(baseSepoliaFork);
 
         vm.startPrank(alice);
         mockERC20TokenBaseSepolia = new MockERC20BurnAndMintToken();
         vm.stopPrank();
+        console.log("[2] mockERC20TokenBaseSepolia deployed");
     }
 
-    function test_forkSupportNewCCIPToken() public {
+    function test_cctDeployment() public {
         // Step 3) Deploy BurnMintTokenPool on Ethereum Sepolia
         vm.selectFork(ethSepoliaFork);
         ethSepoliaNetworkDetails = ccipLocalSimulatorFork.getNetworkDetails(block.chainid);
@@ -114,6 +115,7 @@ contract CCIPv1_5BurnMintPoolFork is Test {
             ethSepoliaNetworkDetails.routerAddress
         );
         vm.stopPrank();
+        console.log("[3] burnMintTokenPoolEthSepolia deployed");
 
         // Step 4) Deploy BurnMintTokenPool on Base Sepolia
         vm.selectFork(baseSepoliaFork);
@@ -128,7 +130,7 @@ contract CCIPv1_5BurnMintPoolFork is Test {
             baseSepoliaNetworkDetails.routerAddress
         );
         vm.stopPrank();
-
+        console.log("[4] burnMintTokenPoolBaseSepolia deployed");
         // Step 5) Grant Mint and Burn roles to BurnMintTokenPool on Ethereum Sepolia
         vm.selectFork(ethSepoliaFork);
 
@@ -136,7 +138,7 @@ contract CCIPv1_5BurnMintPoolFork is Test {
         mockERC20TokenEthSepolia.grantRole(mockERC20TokenEthSepolia.MINTER_ROLE(), address(burnMintTokenPoolEthSepolia));
         mockERC20TokenEthSepolia.grantRole(mockERC20TokenEthSepolia.BURNER_ROLE(), address(burnMintTokenPoolEthSepolia));
         vm.stopPrank();
-
+        console.log("[5] mint and burn roles granted to burnMintTokenPoolEthSepolia");
         // Step 6) Grant Mint and Burn roles to BurnMintTokenPool on Base Sepolia
         vm.selectFork(baseSepoliaFork);
 
@@ -148,6 +150,7 @@ contract CCIPv1_5BurnMintPoolFork is Test {
             mockERC20TokenBaseSepolia.BURNER_ROLE(), address(burnMintTokenPoolBaseSepolia)
         );
         vm.stopPrank();
+        console.log("[6] mint and burn roles granted to burnMintTokenPoolBaseSepolia");
 
         // Step 7) Claim Admin role on Ethereum Sepolia
         vm.selectFork(ethSepoliaFork);
@@ -158,6 +161,7 @@ contract CCIPv1_5BurnMintPoolFork is Test {
         vm.startPrank(alice);
         registryModuleOwnerCustomEthSepolia.registerAdminViaGetCCIPAdmin(address(mockERC20TokenEthSepolia));
         vm.stopPrank();
+        console.log("[7] Claim Admin role on Ethereum Sepolia");
 
         // Step 8) Claim Admin role on Base Sepolia
         vm.selectFork(baseSepoliaFork);
@@ -168,7 +172,7 @@ contract CCIPv1_5BurnMintPoolFork is Test {
         vm.startPrank(alice);
         registryModuleOwnerCustomBaseSepolia.registerAdminViaGetCCIPAdmin(address(mockERC20TokenBaseSepolia));
         vm.stopPrank();
-
+        console.log("[8] Claim Admin role on Base Sepolia");
         // Step 9) Accept Admin role on Ethereum Sepolia
         vm.selectFork(ethSepoliaFork);
 
@@ -178,23 +182,25 @@ contract CCIPv1_5BurnMintPoolFork is Test {
         vm.startPrank(alice);
         tokenAdminRegistryEthSepolia.acceptAdminRole(address(mockERC20TokenEthSepolia));
         vm.stopPrank();
-
+        console.log("[9] Accept Admin role on Ethereum Sepolia");
+    
         // Step 10) Accept Admin role on Base Sepolia
         vm.selectFork(baseSepoliaFork);
 
         TokenAdminRegistry tokenAdminRegistryBaseSepolia =
-            TokenAdminRegistry(baseSepoliaNetworkDetails.tokenAdminRegistryAddress);
+        TokenAdminRegistry(baseSepoliaNetworkDetails.tokenAdminRegistryAddress);
 
         vm.startPrank(alice);
         tokenAdminRegistryBaseSepolia.acceptAdminRole(address(mockERC20TokenBaseSepolia));
         vm.stopPrank();
-
+        console.log("[10] Accept Admin role on Base Sepolia");
         // Step 11) Link token to pool on Ethereum Sepolia
         vm.selectFork(ethSepoliaFork);
 
         vm.startPrank(alice);
         tokenAdminRegistryEthSepolia.setPool(address(mockERC20TokenEthSepolia), address(burnMintTokenPoolEthSepolia));
         vm.stopPrank();
+        console.log("[11] Link token to pool on Ethereum Sepolia");
 
         // Step 12) Link token to pool on Base Sepolia
         vm.selectFork(baseSepoliaFork);
@@ -202,6 +208,7 @@ contract CCIPv1_5BurnMintPoolFork is Test {
         vm.startPrank(alice);
         tokenAdminRegistryBaseSepolia.setPool(address(mockERC20TokenBaseSepolia), address(burnMintTokenPoolBaseSepolia));
         vm.stopPrank();
+        console.log("[12] Link token to pool on Base Sepolia");
 
         // Step 13) Configure Token Pool on Ethereum Sepolia
         vm.selectFork(ethSepoliaFork);
@@ -220,6 +227,7 @@ contract CCIPv1_5BurnMintPoolFork is Test {
         uint64[] memory remoteChainSelectorsToRemove = new uint64[](0);
         burnMintTokenPoolEthSepolia.applyChainUpdates(remoteChainSelectorsToRemove, chains);
         vm.stopPrank();
+        console.log("[13] Configured Token Pool on Ethereum Sepolia");
 
         // Step 14) Configure Token Pool on Base Sepolia
         vm.selectFork(baseSepoliaFork);
@@ -237,6 +245,7 @@ contract CCIPv1_5BurnMintPoolFork is Test {
         });
         burnMintTokenPoolBaseSepolia.applyChainUpdates(remoteChainSelectorsToRemove, chains);
         vm.stopPrank();
+        console.log("[14] Configured Token Pool on Base Sepolia");
 
         // Step 15) Mint tokens on Ethereum Sepolia and transfer them to Base Sepolia
         vm.selectFork(ethSepoliaFork);
@@ -272,6 +281,7 @@ contract CCIPv1_5BurnMintPoolFork is Test {
 
         uint256 balanceOfAliceAfterEthSepolia = mockERC20TokenEthSepolia.balanceOf(alice);
         vm.stopPrank();
+        console.log("[15] minted and sent tokens from Ethereum Sepolia to Base Sepolia");
 
         assertEq(balanceOfAliceAfterEthSepolia, balanceOfAliceBeforeEthSepolia - amountToSend);
 
@@ -279,5 +289,6 @@ contract CCIPv1_5BurnMintPoolFork is Test {
 
         uint256 balanceOfAliceAfterBaseSepolia = mockERC20TokenBaseSepolia.balanceOf(alice);
         assertEq(balanceOfAliceAfterBaseSepolia, amountToSend);
+        console.log("[16] received tokens in Base Sepolia");
     }
 }

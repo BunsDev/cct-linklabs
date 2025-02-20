@@ -20,8 +20,8 @@ evm_version = "paris"
 #solc = '0.8.28'
 
 [rpc_endpoints]
-# ethSepolia = "${ETHEREUM_RPC_URL}"
-# baseSepolia = "${BASE_SEPOLIA_RPC_URL}"
+ethSepolia = "${SEPOLIA_RPC}"
+baseSepolia = "${BASE_SEPOLIA_RPC}"
 
 [etherscan]
 ethSepolia = { key = "${ETHERSCAN_API_KEY}", chain = 11155111, url = "https://api-sepolia.etherscan.io/api" }

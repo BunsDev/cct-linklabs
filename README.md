@@ -64,20 +64,37 @@ KEYSTORE=$(grep KEYSTORE .env | cut -d '=' -f2)
 cast wallet address --keystore $KEYSTORE
 ```
 
-## **4. Deploy Token Contracts**
+## **4. Test Contracts**
 
 Before we proceed with deployment, it is best practice to run tests, which can be executed as follows:
 
 ```bash
-forge test --match-contract SenderTest -vv
+forge test -vvv
 ```
 
-```bash
-forge test --match-contract ReceiverTest -vv
+```plaintext
+[PASS] test_cctDeployment() (gas: 7404836)
+Logs:
+  [1] mockERC20TokenEthSepolia deployed
+  [2] mockERC20TokenBaseSepolia deployed
+  [3] burnMintTokenPoolEthSepolia deployed
+  [4] burnMintTokenPoolBaseSepolia deployed
+  [5] mint and burn roles granted to burnMintTokenPoolEthSepolia
+  [6] mint and burn roles granted to burnMintTokenPoolBaseSepolia
+  [7] Claim Admin role on Ethereum Sepolia
+  [8] Claim Admin role on Base Sepolia
+  [9] Accept Admin role on Ethereum Sepolia
+  [10] Accept Admin role on Base Sepolia
+  [11] Link token to pool on Ethereum Sepolia
+  [12] Link token to pool on Base Sepolia
+  [13] Configured Token Pool on Ethereum Sepolia
+  [14] Configured Token Pool on Base Sepolia
+  [15] minted and sent tokens from Ethereum Sepolia to Base Sepolia
+  [16] received tokens in Base Sepolia
 ```
 
 ### Deployment Scripts
-In order to interact with our contracts, we first need to deploy them, which is simplified in the [`script/deploy`](./script/deploy) smart contract, so let's deploy each contract applying the deployment script for each of the following commands.
+In order to interact with our contracts, we first need to deploy them, which is simplified in the [`script/deploy`](./script/deploy) smart contracts, so let's deploy each contract applying the deployment script for each of the following commands.
 
 <!-- ```bash
 forge script ./script/deploy/DeployTokens.s.sol:DeployToken -vvv --broadcast --rpc-url ethereumSepolia
