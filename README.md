@@ -234,7 +234,7 @@ forge script ./script/deploy/DeployPool.s.sol:DeployPool -vvv --broadcast --rpc-
 ETH_SEPOLIA_RPC=$(grep ETH_SEPOLIA_RPC .env | cut -d '=' -f2)
 WALLET_ADDRESS=$(grep WALLET_ADDRESS .env | cut -d '=' -f2)
 PRIVATE_KEY=$(grep PRIVATE_KEY .env | cut -d '=' -f2)
-forge script script/manage/ClaimAdmin.s.sol:ClaimAdmin --rpc-url $ETH_SEPOLIA_RPC --broadcast --sender $WALLET_ADDRESS --private-key $PRIVATE_KEY
+forge script ./script/admin/ClaimAdmin.s.sol:ClaimAdmin --rpc-url $ETH_SEPOLIA_RPC --broadcast --sender $WALLET_ADDRESS --private-key $PRIVATE_KEY
 ```
 
 ### 7 | Claim Admin Role | [Base Sepolia](./receipts/transactions/claimAdminBaseSepolia.md)
@@ -243,11 +243,11 @@ forge script script/manage/ClaimAdmin.s.sol:ClaimAdmin --rpc-url $ETH_SEPOLIA_RP
 BASE_SEPOLIA_RPC=$(grep BASE_SEPOLIA_RPC .env | cut -d '=' -f2)
 WALLET_ADDRESS=$(grep WALLET_ADDRESS .env | cut -d '=' -f2)
 PRIVATE_KEY=$(grep PRIVATE_KEY .env | cut -d '=' -f2)
-forge script script/manage/ClaimAdmin.s.sol:ClaimAdmin --rpc-url $BASE_SEPOLIA_RPC --broadcast --sender $WALLET_ADDRESS --private-key $PRIVATE_KEY
+forge script ./script/admin/ClaimAdmin.s.sol:ClaimAdmin --rpc-url $BASE_SEPOLIA_RPC --broadcast --sender $WALLET_ADDRESS --private-key $PRIVATE_KEY
 ```
 ![Claim Admin Role Base Sepolia](./receipts/screenshots/claimAdminBaseSepolia.png)
 
-# Step 8 | [Accept Admin Role](./script/manage/AcceptAdmin.s.sol)
+# Step 8 | [Accept Admin Role](./script/admin/AcceptAdmin.s.sol)
 
 ### 8 | Accept Admin Role | [Ethereum Sepolia](./receipts/transactions/acceptAdminEthSepolia.md)
 
@@ -255,7 +255,7 @@ forge script script/manage/ClaimAdmin.s.sol:ClaimAdmin --rpc-url $BASE_SEPOLIA_R
 ETH_SEPOLIA_RPC=$(grep ETH_SEPOLIA_RPC .env | cut -d '=' -f2)
 WALLET_ADDRESS=$(grep WALLET_ADDRESS .env | cut -d '=' -f2)
 PRIVATE_KEY=$(grep PRIVATE_KEY .env | cut -d '=' -f2)
-forge script script/admin/AcceptAdmin.s.sol:AcceptAdmin --rpc-url $ETH_SEPOLIA_RPC --broadcast --sender $WALLET_ADDRESS --private-key $PRIVATE_KEY
+forge script ./script/admin/AcceptAdmin.s.sol:AcceptAdmin --rpc-url $ETH_SEPOLIA_RPC --broadcast --sender $WALLET_ADDRESS --private-key $PRIVATE_KEY
 ```
 
 ### 8 | Accept Admin Role | [Base Sepolia](./receipts/transactions/acceptAdminBaseSepolia.md)
@@ -263,7 +263,7 @@ forge script script/admin/AcceptAdmin.s.sol:AcceptAdmin --rpc-url $ETH_SEPOLIA_R
 BASE_SEPOLIA_RPC=$(grep BASE_SEPOLIA_RPC .env | cut -d '=' -f2)
 WALLET_ADDRESS=$(grep WALLET_ADDRESS .env | cut -d '=' -f2)
 PRIVATE_KEY=$(grep PRIVATE_KEY .env | cut -d '=' -f2)
-forge script script/admin/AcceptAdmin.s.sol:AcceptAdmin --rpc-url $BASE_SEPOLIA_RPC --broadcast --sender $WALLET_ADDRESS --private-key $PRIVATE_KEY
+forge script ./script/admin/AcceptAdmin.s.sol:AcceptAdmin --rpc-url $BASE_SEPOLIA_RPC --broadcast --sender $WALLET_ADDRESS --private-key $PRIVATE_KEY
 ```
 ![Accept Admin Role Base Sepolia](./receipts/screenshots/acceptAdminBaseSepolia.png)
 
@@ -274,7 +274,7 @@ forge script script/admin/AcceptAdmin.s.sol:AcceptAdmin --rpc-url $BASE_SEPOLIA_
 ETH_SEPOLIA_RPC=$(grep ETH_SEPOLIA_RPC .env | cut -d '=' -f2)
 WALLET_ADDRESS=$(grep WALLET_ADDRESS .env | cut -d '=' -f2)
 PRIVATE_KEY=$(grep PRIVATE_KEY .env | cut -d '=' -f2)
-forge script script/manage/SetPool.s.sol:SetPool --rpc-url $ETH_SEPOLIA_RPC --broadcast --sender $WALLET_ADDRESS --private-key $PRIVATE_KEY
+forge script ./script/manage/SetPool.s.sol:SetPool --rpc-url $ETH_SEPOLIA_RPC --broadcast --sender $WALLET_ADDRESS --private-key $PRIVATE_KEY
 ```
 
 ### 9 | Set Pool | [Base Sepolia](./receipts/transactions/setPoolBaseSepolia.md)
@@ -283,7 +283,7 @@ forge script script/manage/SetPool.s.sol:SetPool --rpc-url $ETH_SEPOLIA_RPC --br
 BASE_SEPOLIA_RPC=$(grep BASE_SEPOLIA_RPC .env | cut -d '=' -f2)
 WALLET_ADDRESS=$(grep WALLET_ADDRESS .env | cut -d '=' -f2)
 PRIVATE_KEY=$(grep PRIVATE_KEY .env | cut -d '=' -f2)
-forge script script/manage/SetPool.s.sol:SetPool --rpc-url $BASE_SEPOLIA_RPC --broadcast --sender $WALLET_ADDRESS --private-key $PRIVATE_KEY
+forge script ./script/manage/SetPool.s.sol:SetPool --rpc-url $BASE_SEPOLIA_RPC --broadcast --sender $WALLET_ADDRESS --private-key $PRIVATE_KEY
 ```
 ![Set Pool Base Sepolia](./receipts/screenshots/setPoolBaseSepolia.png)
 
@@ -294,7 +294,7 @@ forge script script/manage/SetPool.s.sol:SetPool --rpc-url $BASE_SEPOLIA_RPC --b
 ETH_SEPOLIA_RPC=$(grep ETH_SEPOLIA_RPC .env | cut -d '=' -f2)
 WALLET_ADDRESS=$(grep WALLET_ADDRESS .env | cut -d '=' -f2)
 PRIVATE_KEY=$(grep PRIVATE_KEY .env | cut -d '=' -f2)
-forge script script/manage/ApplyChain.s.sol:ApplyChain --rpc-url $ETH_SEPOLIA_RPC --broadcast --sender $WALLET_ADDRESS --private-key $PRIVATE_KEY
+forge script ./script/manage/ApplyChain.s.sol:ApplyChain --rpc-url $ETH_SEPOLIA_RPC --broadcast --sender $WALLET_ADDRESS --private-key $PRIVATE_KEY
 ```
 
 ### 10 | Apply Chain | [Base Sepolia](./receipts/transactions/applyChainBaseSepolia.md)
@@ -302,7 +302,7 @@ forge script script/manage/ApplyChain.s.sol:ApplyChain --rpc-url $ETH_SEPOLIA_RP
 BASE_SEPOLIA_RPC=$(grep BASE_SEPOLIA_RPC .env | cut -d '=' -f2)
 WALLET_ADDRESS=$(grep WALLET_ADDRESS .env | cut -d '=' -f2)
 PRIVATE_KEY=$(grep PRIVATE_KEY .env | cut -d '=' -f2)
-forge script script/manage/ApplyChain.s.sol:ApplyChain --rpc-url $BASE_SEPOLIA_RPC --broadcast --sender $WALLET_ADDRESS --private-key $PRIVATE_KEY
+forge script ./script/manage/ApplyChain.s.sol:ApplyChain --rpc-url $BASE_SEPOLIA_RPC --broadcast --sender $WALLET_ADDRESS --private-key $PRIVATE_KEY
 ```
 ![Apply Chain Base Sepolia](./receipts/screenshots/applyChainBaseSepolia.png)
 
@@ -313,7 +313,7 @@ forge script script/manage/ApplyChain.s.sol:ApplyChain --rpc-url $BASE_SEPOLIA_R
 ETH_SEPOLIA_RPC=$(grep ETH_SEPOLIA_RPC .env | cut -d '=' -f2)
 WALLET_ADDRESS=$(grep WALLET_ADDRESS .env | cut -d '=' -f2)
 PRIVATE_KEY=$(grep PRIVATE_KEY .env | cut -d '=' -f2)
-forge script script/mint/MintTokens.s.sol:MintTokens --rpc-url $ETH_SEPOLIA_RPC --broadcast --sender $WALLET_ADDRESS --private-key $PRIVATE_KEY
+forge script ./script/mint/MintTokens.s.sol:MintTokens --rpc-url $ETH_SEPOLIA_RPC --broadcast --sender $WALLET_ADDRESS --private-key $PRIVATE_KEY
 ```
 ![Mint Tokens Ethereum Sepolia](./receipts/screenshots/mintEthSepolia.png)
 
@@ -324,6 +324,6 @@ forge script script/mint/MintTokens.s.sol:MintTokens --rpc-url $ETH_SEPOLIA_RPC 
 ETH_SEPOLIA_RPC=$(grep ETH_SEPOLIA_RPC .env | cut -d '=' -f2)
 WALLET_ADDRESS=$(grep WALLET_ADDRESS .env | cut -d '=' -f2)
 PRIVATE_KEY=$(grep PRIVATE_KEY .env | cut -d '=' -f2)
-forge script script/transfer/TransferTokens.s.sol:TransferTokens --rpc-url $ETH_SEPOLIA_RPC --broadcast --sender $WALLET_ADDRESS --private-key $PRIVATE_KEY
+forge script ./script/transfer/TransferTokens.s.sol:TransferTokens --rpc-url $ETH_SEPOLIA_RPC --broadcast --sender $WALLET_ADDRESS --private-key $PRIVATE_KEY
 ```
 ![Transfer Tokens Ethereum Sepolia](./receipts/screenshots/transferEthSepolia.png)
