@@ -77,9 +77,9 @@ contract BurnMintPoolFork is Test {
     function setUp() public {
         alice = makeAddr("alice");
 
-        string memory SEPOLIA_RPC = vm.envString("SEPOLIA_RPC");
+        string memory ETH_SEPOLIA_RPC = vm.envString("ETH_SEPOLIA_RPC");
         string memory BASE_SEPOLIA_RPC = vm.envString("BASE_SEPOLIA_RPC");
-        ethSepoliaFork = vm.createSelectFork(SEPOLIA_RPC);
+        ethSepoliaFork = vm.createSelectFork(ETH_SEPOLIA_RPC);
         baseSepoliaFork = vm.createFork(BASE_SEPOLIA_RPC);
 
         ccipLocalSimulatorFork = new CCIPLocalSimulatorFork();

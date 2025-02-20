@@ -8,7 +8,7 @@ import {BurnMintTokenPool} from "lib/ccip/contracts/src/v0.8/ccip/pools/BurnMint
 import {BurnMintERC677} from "lib/ccip/contracts/src/v0.8/shared/token/ERC677/BurnMintERC677.sol";
 import {IBurnMintERC20} from "lib/ccip/contracts/src/v0.8/shared/token/ERC20/IBurnMintERC20.sol";
 
-contract DeployBurnMintTokenPool is Script {
+contract DeployPool is Script {
     function run() external {
         // Get the chain name based on the current chain ID
         string memory chainName = HelperUtils.getChainName(block.chainid);
