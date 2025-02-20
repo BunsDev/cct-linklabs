@@ -2,25 +2,25 @@
 pragma solidity >=0.8.24 <0.9.0;
 
 import {Test, Vm} from "forge-std/Test.sol";
-import {CCIPLocalSimulatorFork, Register} from "@chainlink/local/src/ccip/CCIPLocalSimulatorFork.sol";
-import {BurnMintTokenPool, TokenPool} from "@chainlink/contracts-ccip/src/v0.8/ccip/pools/BurnMintTokenPool.sol";
-import {LockReleaseTokenPool} from "@chainlink/contracts-ccip/src/v0.8/ccip/pools/LockReleaseTokenPool.sol"; // not used in this test
-import {IBurnMintERC20} from "@chainlink/contracts-ccip/src/v0.8/shared/token/ERC20/IBurnMintERC20.sol";
+import {CCIPLocalSimulatorFork, Register} from "node_modules/@chainlink/local/src/ccip/CCIPLocalSimulatorFork.sol";
+import {BurnMintTokenPool, TokenPool} from "lib/ccip/contracts/src/v0.8/ccip/pools/BurnMintTokenPool.sol";
+import {LockReleaseTokenPool} from "lib/ccip/contracts/src/v0.8/ccip/pools/LockReleaseTokenPool.sol"; // not used in this test
+import {IBurnMintERC20} from "lib/ccip/contracts/src/v0.8/shared/token/ERC20/IBurnMintERC20.sol";
 import {RegistryModuleOwnerCustom} from
-    "@chainlink/contracts-ccip/src/v0.8/ccip/tokenAdminRegistry/RegistryModuleOwnerCustom.sol";
-import {TokenAdminRegistry} from "@chainlink/contracts-ccip/src/v0.8/ccip/tokenAdminRegistry/TokenAdminRegistry.sol";
-import {RateLimiter} from "@chainlink/contracts-ccip/src/v0.8/ccip/libraries/RateLimiter.sol";
-import {IRouterClient} from "@chainlink/contracts-ccip/src/v0.8/ccip/interfaces/IRouterClient.sol";
-import {Client} from "@chainlink/contracts-ccip/src/v0.8/ccip/libraries/Client.sol";
+    "lib/ccip/contracts/src/v0.8/ccip/tokenAdminRegistry/RegistryModuleOwnerCustom.sol";
+import {TokenAdminRegistry} from "lib/ccip/contracts/src/v0.8/ccip/tokenAdminRegistry/TokenAdminRegistry.sol";
+import {RateLimiter} from "lib/ccip/contracts/src/v0.8/ccip/libraries/RateLimiter.sol";
+import {IRouterClient} from "lib/ccip/contracts/src/v0.8/ccip/interfaces/IRouterClient.sol";
+import {Client} from "lib/ccip/contracts/src/v0.8/ccip/libraries/Client.sol";
 
 import {
     ERC20,
     ERC20Burnable,
     IERC20
 } from
-    "@chainlink/contracts-ccip/src/v0.8/vendor/openzeppelin-solidity/v4.8.3/contracts/token/ERC20/extensions/ERC20Burnable.sol";
+    "lib/ccip/contracts/src/v0.8/vendor/openzeppelin-solidity/v4.8.3/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 import {AccessControl} from
-    "@chainlink/contracts-ccip/src/v0.8/vendor/openzeppelin-solidity/v4.8.3/contracts/access/AccessControl.sol";
+    "lib/ccip/contracts/src/v0.8/vendor/openzeppelin-solidity/v4.8.3/contracts/access/AccessControl.sol";
 
 contract MockERC20BurnAndMintToken is IBurnMintERC20, ERC20Burnable, AccessControl {
     address internal immutable i_CCIPAdmin;

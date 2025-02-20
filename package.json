@@ -7,6 +7,7 @@
   "license": "MIT",
   "dependencies": {
     "@chainlink/contracts-ccip": "^1.5.1-beta.0",
+    "@chainlink/local": "^0.2.3",
     "ccip-tools-ts": "^0.0.1",
     "foundry": "^4.7.0"
   },

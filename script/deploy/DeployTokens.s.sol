@@ -1,13 +1,11 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.28;
+pragma solidity >=0.8.24 <0.9.0;
 
-import {Script, console} from "forge-std/Script.sol";
+import {Script, console} from "lib/forge-std/src/Script.sol";
 // for JSON parsing and chain info
-import {HelperUtils} from "./utils/HelperUtils.s.sol";
-// Network configuration helper
-import {HelperConfig} from "./HelperConfig.s.sol"; 
-import {BurnMintERC677WithCCIPAdmin} from "../src/BurnMintERC677WithCCIPAdmin.sol";
-import {BurnMintERC677} from "@chainlink/contracts-ccip/src/v0.8/shared/token/ERC677/BurnMintERC677.sol";
+import {HelperUtils} from "../utils/HelperUtils.s.sol"; 
+import {BurnMintERC677WithCCIPAdmin} from "../../src/BurnMintERC677WithCCIPAdmin.sol";
+import {BurnMintERC677} from "../../src/Dependencies.sol";
 
 contract DeployToken is Script {
     function run() external {
