@@ -15,7 +15,13 @@
     "update": "forge update",
     "setup": "forge install && forge build",
     "test": "forge test -vvv",
-    "deploy:tokens": "forge script ./script/deploy/DeployTokens.s.sol:DeployToken -vvv --broadcast --rpc-url ethereumSepolia",
-    "deploy:pool": "forge script ./script/deploy/DeployPool.s.sol:DeployBurnMintTokenPool -vvv --broadcast --rpc-url baseSepolia"
+    "deployToken:eth": "forge script ./script/deploy/DeployTokens.s.sol:DeployToken -vvv --broadcast --rpc-url ethSepolia --sender 0x7d5498ee4d080396408bd727a03cff8c12d9d713",
+    "deployToken:base": "forge script ./script/deploy/DeployTokens.s.sol:DeployToken -vvv --broadcast --rpc-url baseSepolia --sender 0x7d5498ee4d080396408bd727a03cff8c12d9d713",
+    "deployPool:eth": "forge script ./script/deploy/DeployPool.s.sol:DeployPool -vvv --broadcast --rpc-url ethSepolia --sender 0x7d5498ee4d080396408bd727a03cff8c12d9d713",
+    "deployPool:base": "forge script ./script/deploy/DeployPool.s.sol:DeployPool -vvv --broadcast --rpc-url baseSepolia --sender 0x7d5498ee4d080396408bd727a03cff8c12d9d713",
+    "claimAdmin:eth": "forge script script/admin/ClaimAdmin.s.sol:ClaimAdmin --rpc-url ethSepolia --broadcast --sender 0x7d5498ee4d080396408bd727a03cff8c12d9d713",
+    "claimAdmin:base": "forge script script/admin/ClaimAdmin.s.sol:ClaimAdmin --rpc-url baseSepolia --broadcast --sender 0x7d5498ee4d080396408bd727a03cff8c12d9d713",
+    "acceptAdmin:eth": "forge script script/admin/AcceptAdmin.s.sol:AcceptAdmin --rpc-url ethSepolia --broadcast --sender 0x7d5498ee4d080396408bd727a03cff8c12d9d713",
+    "acceptAdmin:base": "forge script script/admin/AcceptAdmin.s.sol:AcceptAdmin --rpc-url baseSepolia --broadcast --sender 0x7d5498ee4d080396408bd727a03cff8c12d9d713"
   }
 }

@@ -20,7 +20,7 @@ evm_version = "paris"
 #solc = '0.8.28'
 
 [rpc_endpoints]
-ethSepolia = "${SEPOLIA_RPC}"
+ethSepolia = "${ETH_SEPOLIA_RPC}"
 baseSepolia = "${BASE_SEPOLIA_RPC}"
 
 [etherscan]
