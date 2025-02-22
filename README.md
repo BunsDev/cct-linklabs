@@ -122,7 +122,7 @@ cast wallet address --keystore $KEYSTORE
 export WALLET_ADDRESS=$(cast wallet address --keystore $KEYSTORE)
 
 ```
-![setupWallet](./screenshots/setupWallet.png)
+![setupWallet](./receipts/screenshots/setupWallet.png)
 
 # Step 4 | [Test Contracts](./test/BnM.t.sol)
 
